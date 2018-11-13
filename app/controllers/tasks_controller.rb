@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   def index
-    @tasks = current_user.tasks
+    @tasks = current_user.tasks.recent
   end
 
   def show
@@ -19,7 +19,7 @@ class TasksController < ApplicationController
 #    @task = Task.new(task_params.merge(user_id: current_user.id))
     @task = current_user.tasks.new(task_params)
     if @task.save
-      redirect_to tasks_url(@task), notice: "タスク「#{@task.name}」を登録しました"
+      redirect_to task_url, notice: "タスク「#{@task.name}」を登録しました"
     else
       render :new
     end
