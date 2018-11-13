@@ -18,7 +18,7 @@ class TasksController < ApplicationController
 #    @task = Task.new(task_params.merge(user_id: current_user.id))
     @task = current_user.tasks.new(task_params)
     if @task.save
-      redirect_to task_url, notice: "タスク「#{@task.name}」を登録しました"
+      redirect_to task_url(@task), notice: "タスク「#{@task.name}」を登録しました"
     else
       render :new
     end
@@ -26,7 +26,7 @@ class TasksController < ApplicationController
 
   def update
     @task.update!(task_params)
-    redirect_to task_url, notice: "タスク「#{@task.name}」を更新しました"
+    redirect_to task_url(@task), notice: "タスク「#{@task.name}」を更新しました"
   end
 
   def destroy
